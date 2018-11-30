@@ -1,0 +1,20 @@
+version: '2'
+services:
+  simulator:
+    build: .
+    ports:
+     - "8080:8080"
+    networks:
+     - local
+  prometheus:
+    image: prom/prometheus
+    ports:
+     - "9090:9090"
+    networks:
+     - local
+    volumes:
+     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    links:
+      - "simulator"
+networks:
+  local:
