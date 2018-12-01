@@ -2,7 +2,6 @@ package com.bektz.simulator.promethussimulate.simulator;
 
 import io.prometheus.client.Counter;
 import io.prometheus.client.Histogram;
-import io.prometheus.client.spring.boot.EnablePrometheusEndpoint;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
@@ -10,7 +9,6 @@ import java.util.Random;
 import static com.bektz.simulator.promethussimulate.simulator.SimulatorOpts.SpikeMode.*;
 
 @Slf4j
-@EnablePrometheusEndpoint
 public class ActivitySimulator implements Runnable {
 
     private SimulatorOpts opts;

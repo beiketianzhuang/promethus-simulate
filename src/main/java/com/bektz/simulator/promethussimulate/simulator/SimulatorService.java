@@ -3,13 +3,15 @@ package com.bektz.simulator.promethussimulate.simulator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimulatorService {
+public class SimulatorService implements ApplicationListener<ContextClosedEvent> {
 
     @Autowired
     private SimulatorOpts opts;
@@ -35,4 +37,9 @@ public class SimulatorService {
         return simulator;
     }
 
+    @Override
+    public void onApplicationEvent(ContextClosedEvent contextClosedEvent) {
+        simulator.shutdown();
+        System.out.println("Simulator shutdown...");
+    }
 }
